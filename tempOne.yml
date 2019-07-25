@@ -171,9 +171,9 @@ Resources:
                 - npm run build
             post_build:
               commands:
-                - aws s3 cp --recursive --acl public-read ./build s3://${cool-react-bucket}/
-                - aws s3 cp --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/service-worker.js s3://${cool-react-bucket}/
-                - aws s3 cp --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/index.html s3://${cool-react-bucket}/
+                - aws s3 cp --recursive --acl public-read ./build s3://${coolreactbucket}/
+                - aws s3 cp --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/service-worker.js s3://${coolreactbucket}/
+                - aws s3 cp --acl public-read --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/index.html s3://${coolreactbucket}/
                 - aws cloudfront create-invalidation --distribution-id ${Distribution} --paths /index.html /service-worker.js
           artifacts:
             files:
@@ -182,7 +182,7 @@ Resources:
   PipelineBucket:
     Type: 'AWS::S3::Bucket'
     Properties: {}
-  cool-react-bucket:
+  coolreactbucket:
     Type: 'AWS::S3::Bucket'
     Properties:
       WebsiteConfiguration:
