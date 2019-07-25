@@ -35,7 +35,7 @@ Resources:
                 Version: 1
               OutputArtifacts:
                 -
-                  Name: cool-react-app
+                  Name: coolreactapp
               Configuration:
                 Owner: !Ref GithubOwner
                 Repo: !Ref GithubRepo
@@ -53,10 +53,10 @@ Resources:
                 Provider: CodeBuild
               InputArtifacts:
                 -
-                  Name: cool-react-app
+                  Name: coolreactapp
               OutputArtifacts:
                 -
-                  Name: cool-react-build
+                  Name: coolreactbuild
               Configuration:
                 ProjectName: !Ref CodeBuild
   CodeBuildRole:
@@ -97,8 +97,8 @@ Resources:
                   - "s3:PutObject"
                   - "s3:PutObjectAcl"
                 Resource:
-                  - !GetAtt cool-react-bucket.Arn
-                  - !Join ['', [!GetAtt cool-react-bucket.Arn, "/*"]]
+                  - !GetAtt coolreactbucket.Arn
+                  - !Join ['', [!GetAtt coolreactbucket.Arn, "/*"]]
               -
                 Effect: Allow
                 Action:
@@ -193,8 +193,8 @@ Resources:
       DistributionConfig:
         Origins:
           -
-            DomainName: !GetAtt cool-react-bucket.DomainName
-            Id: !Ref cool-react-bucket
+            DomainName: !GetAtt coolreactbucket.DomainName
+            Id: !Ref coolreactbucket
             S3OriginConfig:
               OriginAccessIdentity: ''
         DefaultRootObject: index.html
@@ -204,5 +204,5 @@ Resources:
           MaxTTL: 31536000
           ForwardedValues:
             QueryString: true
-          TargetOriginId: !Ref cool-react-bucket
+          TargetOriginId: !Ref coolreactbucket
           ViewerProtocolPolicy: "redirect-to-https"
